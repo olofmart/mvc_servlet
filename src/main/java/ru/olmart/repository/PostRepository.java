@@ -1,12 +1,13 @@
 package ru.olmart.repository;
 
+import org.springframework.stereotype.Repository;
 import ru.olmart.exception.NotFoundException;
 import ru.olmart.model.Post;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
-
+@Repository
 public class PostRepository {
   private Map<Long, Post> mapPosts = new ConcurrentHashMap<>();
   private long key = 0L;
