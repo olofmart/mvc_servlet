@@ -1,25 +1,50 @@
 package ru.olmart.repository;
 
+import ru.olmart.exception.NotFoundException;
 import ru.olmart.model.Post;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
-// Stub
 public class PostRepository {
-  public List<Post> all() {
-    return Collections.emptyList();
+  private Map<Long, Post> mapPosts = new ConcurrentHashMap<>();
+  private long key = 0L;
+
+  public List<Post> all() throws NotFoundException {
+    if (mapPosts != null) {
+      return mapPosts.values().stream().collect(Collectors.toList());
+    } else {
+      throw new NotFoundException("Nit yet any post");
+    }
   }
 
-  public Optional<Post> getById(long id) {
-    return Optional.empty();
+  public Optional<Post> getById(long id) throws NotFoundException {
+    if (mapPosts.containsKey(id)) {
+      return Optional.ofNullable(mapPosts.get(id));
+    } else {
+      throw new NotFoundException("Post not found");
+    }
   }
 
-  public Post save(Post post) {
-    return post;
+  public Post save(Post post) throws NotFoundException {
+    if (post.getId() == 0) {
+      synchronized (this) {
+        key++;
+      }
+      post.setId(key);
+      mapPosts.put(key, post);
+      return post;
+    }
+    if ((post.getId() != 0) && (mapPosts.containsKey(post.getId()))) {
+      mapPosts.replace(post.getId(), post);
+      return post;
+    } else {
+      throw new NotFoundException("Post not found");
+    }
   }
 
   public void removeById(long id) {
+      mapPosts.remove(id);
   }
 }
