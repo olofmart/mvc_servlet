@@ -1,12 +1,13 @@
 package ru.olmart.repository;
 
+import org.springframework.stereotype.Repository;
 import ru.olmart.exception.NotFoundException;
 import ru.olmart.model.Post;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
-
+@Repository
 public class PostRepository {
   private final Map<Long, Post> mapPosts;
   private AtomicLong key = new AtomicLong(0L);

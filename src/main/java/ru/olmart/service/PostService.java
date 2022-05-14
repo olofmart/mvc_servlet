@@ -1,14 +1,18 @@
 package ru.olmart.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.olmart.exception.NotFoundException;
 import ru.olmart.model.Post;
 import ru.olmart.repository.PostRepository;
 
 import java.util.List;
 
+@Service
 public class PostService {
   private final PostRepository repository;
 
+  @Autowired
   public PostService(PostRepository repository) {
     this.repository = repository;
   }
