@@ -12,7 +12,7 @@ public class PostRepository {
   private AtomicLong key = new AtomicLong(0L);
 
   public PostRepository() {
-    this.mapPosts =  new HashMap<>();
+    this.mapPosts =  new ConcurrentHashMap<>();
   }
 
   public List<Post> all() throws NotFoundException {
