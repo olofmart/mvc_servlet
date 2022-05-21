@@ -43,5 +43,6 @@ public class PostRepository {
 
   public void removeById(long id) {
       mapPosts.remove(id);
+      key.decrementAndGet();
   }
 }
