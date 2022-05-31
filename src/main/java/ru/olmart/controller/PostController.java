@@ -1,9 +1,8 @@
 package ru.olmart.controller;
 
-import com.google.gson.Gson;
 import ru.olmart.model.Post;
 import ru.olmart.service.PostService;
-
+import com.google.gson.Gson;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Reader;

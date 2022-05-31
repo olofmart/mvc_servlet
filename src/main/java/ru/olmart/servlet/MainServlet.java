@@ -1,6 +1,7 @@
 package ru.olmart.servlet;
 
 import ru.olmart.controller.PostController;
+import ru.olmart.exception.NotFoundException;
 import ru.olmart.repository.PostRepository;
 import ru.olmart.service.PostService;
 
@@ -46,6 +47,9 @@ public class MainServlet extends HttpServlet {
         controller.removeById(id, resp);
         return;
       }
+      resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+    } catch (NotFoundException e) {
+      e.printStackTrace();
       resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
     } catch (Exception e) {
       e.printStackTrace();

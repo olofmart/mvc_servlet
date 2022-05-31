@@ -33,8 +33,8 @@ public class PostRepository {
       mapPosts.put(key.get(), post);
       return post;
     }
-    if ((post.getId() != 0) && (mapPosts.containsKey(key.get()))) {
-      mapPosts.replace(key.get(), post);
+    if ((post.getId() != 0) && (mapPosts.containsKey(post.getId()))) {
+      mapPosts.replace(post.getId(), post);
       return post;
     } else {
       throw new NotFoundException("Post not found");
@@ -43,6 +43,6 @@ public class PostRepository {
 
   public void removeById(long id) {
       mapPosts.remove(id);
-      key.decrementAndGet();
+      //key.decrementAndGet();
   }
 }
